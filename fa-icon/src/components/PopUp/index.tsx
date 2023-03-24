@@ -1,6 +1,6 @@
+import { AppColors, FROM_POP_UP_TYPE } from "@/lib/constant";
 import React from "react";
 import styled from "styled-components";
-import { AppColors, FROM_POP_UP_TYPE } from "../../lib/constant";
 
 type ModalProps = {
   popUptype: "form" | "popup";

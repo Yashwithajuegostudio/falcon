@@ -1,21 +1,27 @@
+/* eslint-disable react/jsx-key */
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-
+import { FiLogOut } from "react-icons/fi";
 import styled from "styled-components";
-import { AuthContext } from "../../context/AuthProvider";
-import { AppColors, LOGOUT } from "../../lib/constant";
+
 import { menuLinkProps } from "../../lib/types";
 import { SidebarData } from "./SidebarData";
-import Img from "../Img";
+
+import { AppColors, ButtonName } from "@/lib/constant";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { AuthContext } from "@/context/AuthProvider";
 
 interface LayoutProps {
   Component: React.FC<{}>;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ Component }) => {
-  const { resetToken } = useContext(AuthContext);
   const router = useRouter();
+  const [setLocalStorageClear] = useLocalStorage();
 
+  const { resetToken } = useContext(AuthContext);
+  // const { toastMessageData, setToastMessageData }: any =
+  //   useContext(ToastMessageContext);
   const [headerData, setHeaderData] = useState({
     icon: <></>,
     title: "",
@@ -30,187 +36,81 @@ export const Layout: React.FC<LayoutProps> = ({ Component }) => {
   return (
     <div>
       <SidebarDiv>
-        <AppTitle>
-          <Img
-            src={`assets/SidebarLogo.png`}
-            alt={"stimuli logo"}
-            className="logo"
-          />
-        </AppTitle>
-
+        <AppLogo>FAICON </AppLogo>
         <SidebarItem>
           {SidebarData.map((item, index) => {
             return (
-              <MenuLinkContainer>
-                <MenuLink
-                  onClick={() => {
-                    router.push(item.path);
-                  }}
-                  key={index}
-                  isActive={router.pathname === item.path}
-                >
-                  <Icon isActive={router.pathname === item.path}>
-                    {item.icon}
-                  </Icon>
-
-                  <Title
-                    style={{
-                      flexWrap: "nowrap",
-                      textAlign: "left",
-                      width: "11rem",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {item.title}
-                  </Title>
-                </MenuLink>
-                <DIV isActive={router.pathname === item.path} />
-              </MenuLinkContainer>
+              <MenuLink
+                onClick={() => router.push(item.path)}
+                key={index}
+                isActive={router.pathname == item.path}
+              >
+                {item.icon}
+                <Title>{item.title}</Title>
+              </MenuLink>
             );
           })}
         </SidebarItem>
       </SidebarDiv>
       <SidebarRightDiv>
         <Header>
-          <AdminProfileContainer>
-            <label>Stemuli Man</label>
-            <HeaderSubText>Admin</HeaderSubText>
-          </AdminProfileContainer>
-          <ProfileImageContainer />
-          <VerticalLine />
-          <HeaderSubText>{LOGOUT}</HeaderSubText>
-          <ButtonContainer onClick={resetToken}>
-            <Img src={`assets/logout-icon.png`} alt={"logout icon"} />
+          {/* <Span>
+          <Icon>{headerData.icon}</Icon>
+          {headerData.title}
+        </Span> */}
+          <ButtonContainer>
+            <FiLogOut onClick={resetToken} />
           </ButtonContainer>
         </Header>
-        <PageLayoutOuterContainer>
-          <LayoutPageContainer>
-            <LayoutTopSquare />
-            <LayoutCircle />
-            <LayoutBottomSquare />
-            <PageContainer>
-              <Component />
-            </PageContainer>
-          </LayoutPageContainer>
-        </PageLayoutOuterContainer>
-        <CopyRightContainer>
-          <CopyRightContent>
-            @2022-2030 Stemuli |
-            <ReservedContent> All Right Reserved.</ReservedContent>
-          </CopyRightContent>
-        </CopyRightContainer>
+        <PageContainer>
+          <Component />
+        </PageContainer>
       </SidebarRightDiv>
     </div>
   );
 };
 
-const MenuLinkContainer = styled.main`
-  display: flex;
-  height: 3.5rem;
-`;
-const DIV = styled.div<menuLinkProps>`
-  border-left: 0.4rem solid ${AppColors.White};
-  display: ${(props) => (props.isActive ? `block` : `none`)};
-  height: 2.3rem;
-`;
-const ReservedContent = styled.label`
-  color: ${AppColors.LightShadeRed};
-`;
-const CopyRightContent = styled.label`
-  font-weight: 600;
-`;
-const CopyRightContainer = styled.main`
-  position: absolute;
-  bottom: 1.5rem;
-  right: 4.5rem;
-  display: flex;
-  justify-content: flex-end;
-`;
-const VerticalLine = styled.div`
-  border-left: 0.2rem solid ${AppColors.DarkShadeGrey};
-  height: 2.5rem;
-  margin-right: 0.5rem;
-`;
-const ProfileImageContainer = styled.main`
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  background-color: ${AppColors.ProfileContainerColor};
-`;
-const HeaderSubText = styled.label`
-  color: ${AppColors.AdminTextColor};
-  text-align: end;
-  font-weight: 500;
-`;
-const AdminProfileContainer = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-const PageLayoutOuterContainer = styled.div`
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background-color: ${AppColors.LightShadeSkyBlue};
-`;
-const LayoutBottomSquare = styled.div`
-  position: absolute;
-  left: 3rem;
-  background-color: ${AppColors.LightShadePurple};
-  width: 10rem;
-  height: 10rem;
-  bottom: -9rem;
-  transform: rotate(30deg);
-`;
-const LayoutTopSquare = styled.div`
-  position: absolute;
-  left: -8rem;
-  background-color: ${AppColors.LightShadeYellow};
-  width: 10rem;
-  height: 10rem;
-  top: -1rem;
-  transform: rotate(30deg);
-`;
-const LayoutCircle = styled.div`
-  position: absolute;
-  top: 10rem;
-  right: -3.6rem;
-  width: 100px;
-  height: 200px;
-  border-radius: 100px 0 0 100px;
-  background-color: ${AppColors.LightShadeOrange};
-`;
 const Header = styled.div`
   background-color: ${AppColors.White};
   height: 10vh;
   width: 100%;
+  float: right;
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
   padding: 0rem 4rem;
   align-items: center;
 `;
+const AppLogo = styled.h2`
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+`;
 
-const Icon = styled.div<menuLinkProps>`
+const Span = styled.span`
+  display: flex;
+  font-size: 0.875rem;
+  align-items: center;
+`;
+const Icon = styled.div`
+  padding-right: 0.75rem;
   display: flex;
   align-self: center;
-  font-size: 1.5rem;
-  filter: ${(props) => (props.isActive ? `brightness(0) invert(0)` : `none`)};
 `;
 
 const SidebarRightDiv = styled.div`
-  width: calc(100% - 15rem);
+  width: 85vw;
   float: right;
   height: 100vh;
 `;
 
 const SidebarDiv = styled.div`
-  width: 15rem;
-  background-color: ${AppColors.LightShadeRed};
+  width: 15%;
+  background-color: ${AppColors.Violet};
   height: 100vh;
   text-align: center;
   color: ${AppColors.White};
+  min-width: 15%;
   position: absolute;
-  z-index: 3;
 `;
 
 const SidebarItem = styled.div`
@@ -223,22 +123,21 @@ const SidebarItem = styled.div`
 `;
 
 const MenuLink = styled.button<menuLinkProps>`
-  height: 2.3rem;
   border-style: none;
   background: none;
-  color: ${(props) =>
-    props.isActive ? `${AppColors.Black}` : `${AppColors.AppWhite}`};
+  color: ${AppColors.White};
   background-color: ${(props) =>
-    props.isActive ? `${AppColors.ActiveMenuColor}` : "none"};
+    props.isActive ? `${AppColors.Active}` : "none"};
   display: flex;
-  align-items: center;
-  border-radius: ${(props) => (props.isActive ? "0rem" : "none")};
-  width: 14.4rem;
-  padding: 0.4rem;
+  border-radius: ${(props) => (props.isActive ? "0.5rem" : "none")};
+  padding: 0.75rem 0.65rem;
   margin-bottom: 1rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   :hover {
     cursor: pointer;
+  }
+  @media only screen and (max-device-width: 1112px) {
+    align-self: center;
   }
 `;
 const Title = styled.span`
@@ -248,7 +147,7 @@ const Title = styled.span`
   }
 `;
 
-const LayoutPageContainer = styled.div`
+const PageContainer = styled.div`
   width: 100%;
   height: 90vh;
   overflow: hidden;
@@ -258,17 +157,8 @@ const LayoutPageContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  padding: 0.5rem 1rem;
   :hover {
     background-color: ${AppColors.GreyTwo};
   }
-`;
-
-const AppTitle = styled.div`
-  width: 13rem;
-  padding: 1.2rem 0rem 0rem 1rem;
-`;
-
-const PageContainer = styled.div`
-  width: 90%;
-  height: 90%;
 `;

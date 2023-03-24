@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import styled, { keyframes } from "styled-components";
-import { AppColors } from "../../lib/constant";
-
 import { TOAST_PROPERTIES } from "./toastProperties";
+import { AppColors } from "@/lib/constant";
 export interface ToastProps {
   type?: "success" | "warning" | "info" | "error";
   position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
@@ -18,14 +17,16 @@ const Toast: React.FC<ToastProps> = ({
   onClose,
 }) => {
   const [toast_state, setToast_State] = useState<boolean>(false);
-  const [list, setList] =useState(TOAST_PROPERTIES.filter((obj: { type: string }) => obj.type == type));
+  const [list, setList] = useState(
+    TOAST_PROPERTIES.filter((obj: { type: string }) => obj.type == type)
+  );
 
   useEffect(() => {}, []);
 
   useEffect(() => {
     setTimeout(() => {
-      onClose()
-    },7000);
+      onClose();
+    }, 7000);
   }, []);
 
   return (

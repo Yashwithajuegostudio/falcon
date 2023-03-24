@@ -1,8 +1,9 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 import styled from "styled-components";
-import { AppColors } from "../../lib/constant";
+
 import Input from "../Input";
+import { AppColors } from "@/lib/constant";
 
 interface SearchInputProps {
   filter?: string;

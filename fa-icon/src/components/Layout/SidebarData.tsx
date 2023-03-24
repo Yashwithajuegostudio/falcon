@@ -1,33 +1,20 @@
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import Img from "../Img";
+import * as BsIcons from "react-icons/bs";
+import * as BiIcons from "react-icons/bi";
 export const SidebarData = [
   {
-    title: "User Management",
+    title: "Ads Partner List",
     path: "/",
-    icon: <AiIcons.AiOutlineUser />,
-  },
-
-  {
-    title: "Room Management",
-    path: "/RoomManagement",
-    icon: (
-      <Img
-        src={`assets/room_managemnet_icon.png`}
-        alt={"room management"}
-        className="room_managemnet_icon"
-      />
-    ),
+    icon: <FaIcons.FaListUl />,
   },
   {
-    title: "Global Room Management",
-    path: "/GlobalRoomManagement",
-    icon: (
-      <Img
-        src={`assets/room_managemnet_icon.png`}
-        alt={"room management"}
-        className="room_managemnet_icon"
-      />
-    ),
+    title: "Add Partner",
+    path: "/AddPartner",
+    icon: <BsIcons.BsPersonAdd />,
+  },
+  {
+    title: "Add Device Id",
+    path: "/AddDeviceId",
+    icon: <BiIcons.BiDevices />,
   },
 ];

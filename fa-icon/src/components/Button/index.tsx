@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {
   AppColors,
   Border_half_curved,
+  ButtonName,
   CUSTOM_WIDTH,
   FULL_WIDTH,
   PRIMARY_BUTTON_VARIANT,
-  SUBMIT_BUTTON,
 } from "../../lib/constant";
 import Img from "../Img";
 
@@ -31,7 +31,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   type = "button",
-  value = SUBMIT_BUTTON,
+  value = ButtonName.Submit,
   onClick,
   onChange,
   variant = PRIMARY_BUTTON_VARIANT,
@@ -89,7 +89,7 @@ const ButtonComp = styled.button<ButtonProps>`
       : props.variant === PRIMARY_BUTTON_VARIANT
       ? props.backgroundColor
         ? `${props.backgroundColor}`
-        : `${AppColors.LightShadeRed}`
+        : `${AppColors.Primary}`
       : `${AppColors.AppWhite}`};
 
   color: ${(props) =>

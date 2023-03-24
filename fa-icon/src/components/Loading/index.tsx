@@ -1,5 +1,6 @@
+import { AppColors } from "@/lib/constant";
 import ReactLoading from "react-loading";
-import { AppColors } from "../../lib/constant";
+
 import styled from "styled-components";
 
 const ShowLoading: React.FC = () => {

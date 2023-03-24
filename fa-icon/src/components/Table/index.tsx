@@ -1,3 +1,13 @@
+/* eslint-disable react/jsx-key */
+import { AppColors } from "@/lib/constant";
+import {
+  HeaderGroup,
+  RoomListProp,
+  TableColumnProps,
+  TableContentProps,
+  UserListProp,
+  useTableProps,
+} from "@/lib/types";
 import {
   faSortAmountDesc,
   faSortAmountUp,
@@ -13,18 +23,9 @@ import {
   useTable,
 } from "react-table";
 import styled from "styled-components";
-import { TableContainer } from "../../../styles/globalStyles";
-import { AppColors } from "../../lib/constant";
-import {
-  HeaderGroup,
-  RoomListProp,
-  TableColumnProps,
-  TableContentProps,
-  UserListProp,
-  useTableProps,
-} from "../../lib/types";
+import { TableContainer } from "styles/globalStyles";
 import NoData from "../NoData";
-import Pagination, { ButtonComp } from "../Pagination";
+import Pagination from "../Pagination";
 
 interface TableProps {
   columns: Array<TableColumnProps> | any;

@@ -88,9 +88,9 @@ const FormHeader = styled.p<formHeaderProps>`
   font-weight: bold;
   text-align: center;
   /* padding: 0.8rem 0 0.5rem 0; */
-  color: ${(props) => (props.color ? props.color : AppColors.LightShadeRed)};
+  color: ${(props) => (props.color ? props.color : AppColors.Black)};
   font-weight: 700;
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "2.5rem")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
   margin-bottom: 0.5rem;
   padding: 0;
   width: 100%;
@@ -114,7 +114,6 @@ const FormSubContent = styled.main`
 `;
 
 const FormSubHeader = styled.main`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
 `;
