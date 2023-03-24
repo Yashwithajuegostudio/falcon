@@ -17,11 +17,9 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ Component }) => {
   const router = useRouter();
-  const [setLocalStorageClear] = useLocalStorage();
 
   const { resetToken } = useContext(AuthContext);
-  // const { toastMessageData, setToastMessageData }: any =
-  //   useContext(ToastMessageContext);
+
   const [headerData, setHeaderData] = useState({
     icon: <></>,
     title: "",
@@ -54,10 +52,10 @@ export const Layout: React.FC<LayoutProps> = ({ Component }) => {
       </SidebarDiv>
       <SidebarRightDiv>
         <Header>
-          {/* <Span>
-          <Icon>{headerData.icon}</Icon>
-          {headerData.title}
-        </Span> */}
+          <Span>
+            <Icon>{headerData.icon}</Icon>
+            {headerData.title}
+          </Span>
           <ButtonContainer>
             <FiLogOut onClick={resetToken} />
           </ButtonContainer>
@@ -76,7 +74,7 @@ const Header = styled.div`
   width: 100%;
   float: right;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0rem 4rem;
   align-items: center;
 `;
@@ -88,7 +86,7 @@ const AppLogo = styled.h2`
 
 const Span = styled.span`
   display: flex;
-  font-size: 0.875rem;
+  font-size: 1.7rem;
   align-items: center;
 `;
 const Icon = styled.div`

@@ -73,7 +73,7 @@ export const Label = styled.label<ContainerProps>`
   direction: ${(props) => (props.direction === "column" ? "column" : "row")};
   display: block;
   align-self: flex-start;
-  margin: auto 0.3rem;
+  margin: 0.5rem;
   font-size: 0.9rem !important;
   color: ${AppColors.TextColor};
   text-align: ${(props) => (props.textAlign === "right" ? "right" : "left")};
